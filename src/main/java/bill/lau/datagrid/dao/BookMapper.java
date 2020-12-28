@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface BookMapper {
 
-    @Insert("INSERT INFO book(name, press) VALUES(#{name}, #{press})")
+    @Insert("INSERT INTO book(name, press) VALUES(#{name}, #{press})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Book book);
 
@@ -18,7 +18,7 @@ public interface BookMapper {
     @Delete("DELETE FROM book WHERE id = #{id}")
     void delete(Integer id);
 
-    @Update("UPDATE book SET name = #{name}, press = #{press} AND id = #{id}")
+    @Update("UPDATE book SET name = #{name}, press = #{press} WHERE id = #{id}")
     void update(Book book);
 
     @SelectProvider(BoolSqlProvider.class)
