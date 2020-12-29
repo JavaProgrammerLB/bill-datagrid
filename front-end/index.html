@@ -1,10 +1,113 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css">
+
+    <title>Book管理</title>
 </head>
 <body>
+<div class="container" id="app">
+    <div id="add">
+        <button type="button" class="btn btn-primary">新增</button>
+    </div>
+    <div id="select-form">
+        <form>
+            <div class="form-row align-items-center">
+                <div class="col-sm-2 my-1">
+                    <label class="sr-only" for="inlineFormInputGroupID">全部</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">ID</div>
+                        </div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupID" placeholder="全部">
+                    </div>
+                </div>
 
+                <div class="col-sm-2 my-1">
+                    <label class="sr-only" for="inlineFormInputGroupName">全部</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">书名</div>
+                        </div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupName" placeholder="全部">
+                    </div>
+                </div>
+
+                <div class="col-sm-3 my-1">
+                    <label class="sr-only" for="inlineFormInputGroupPress">全部</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">出版社</div>
+                        </div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupPress" placeholder="全部">
+                    </div>
+                </div>
+
+                <div class="col-auto my-1">
+                    <button type="submit" class="btn btn-primary">查询</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="table">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">书名</th>
+                <th scope="col">出版社</th>
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Linux命令行与shell脚本编程大全</td>
+                <td>人民邮电出版社</td>
+                <td>
+                    <button type="button" class="btn btn-primary">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Java8实战</td>
+                <td>人民邮电出版社</td>
+                <td>
+                    <button type="button" class="btn btn-primary">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="page">
+        <div class="row">
+            <div class="col-md-5">
+                <button type="button" class="btn btn-light">下一页</button>
+                共 3 页
+                <button type="button" class="btn btn-light">上一页</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="lib/vue/vue.min.js"></script>
+<script src="lib/axios/axios.min.js"></script>
+<script type="text/javascript">
+    var app3 = new Vue({
+        el: '#app',
+        data: {
+           name: "Java8实战"
+        },
+        methods: {
+        }
+    })
+
+</script>
 </body>
 </html>
