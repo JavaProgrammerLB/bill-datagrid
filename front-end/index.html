@@ -65,19 +65,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Linux命令行与shell脚本编程大全</td>
-                <td>人民邮电出版社</td>
-                <td>
-                    <button type="button" class="btn btn-primary">修改</button>
-                    <button type="button" class="btn btn-danger">删除</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Java8实战</td>
-                <td>人民邮电出版社</td>
+            <tr v-for="book in books" :key="book.id">
+                <th scope="row">{{ book.id }}</th>
+                <td>{{ book.name }}</td>
+                <td>{{ book.press }}</td>
                 <td>
                     <button type="button" class="btn btn-primary">修改</button>
                     <button type="button" class="btn btn-danger">删除</button>
@@ -102,9 +93,20 @@
     var app3 = new Vue({
         el: '#app',
         data: {
-           name: "Java8实战"
+           books:[],
         },
         methods: {
+        },
+        beforeMount: function(){
+            let vue_this = this;
+            axios.get("http://localhost:8080/books")
+            .then(function(response){
+                console.log(response);
+                console.log(response.data.data);
+                vue_this.books = response.data.data;
+            }).catch(function(error){
+                alert(error);
+            });
         }
     })
 
