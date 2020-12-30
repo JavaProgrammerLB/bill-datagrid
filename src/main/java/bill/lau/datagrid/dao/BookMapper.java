@@ -24,4 +24,6 @@ public interface BookMapper {
     @SelectProvider(BoolSqlProvider.class)
     List<Book> findByParam(Book book);
 
+    @Select("SELECT * FROM book")
+    List<Book> getAllBooks();
 }

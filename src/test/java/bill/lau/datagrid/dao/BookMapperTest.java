@@ -23,7 +23,7 @@ public class BookMapperTest {
     private BookMapper bookMapper;
 
     @Before
-    public void setup(){
+    public void setup() {
         // insert
         Book book = new Book();
         book.setName("Java8实战");
@@ -81,7 +81,7 @@ public class BookMapperTest {
     }
 
     @Test
-    public void findByParam3(){
+    public void findByParam3() {
         Book book = new Book();
         book.setPress("出版社");
         List<Book> books = bookMapper.findByParam(book);
@@ -89,4 +89,13 @@ public class BookMapperTest {
         assertEquals("Java8实战", books.get(0).getName());
         assertEquals("人民邮电出版社", books.get(0).getPress());
     }
+
+    @Test
+    public void getAllBooks() {
+        List<Book> books = bookMapper.getAllBooks();
+        assertTrue(books.size() > 0);
+        assertEquals("Java8实战", books.get(0).getName());
+        assertEquals("人民邮电出版社", books.get(0).getPress());
+    }
+
 }

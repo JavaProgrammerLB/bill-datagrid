@@ -46,7 +46,7 @@ public class BookController {
 
     @PutMapping("/book")
     public BaseResponse<String> update(@RequestBody Book book) {
-        if(book.getId() == null){
+        if (book.getId() == null) {
             BaseResponse response = new BaseResponse();
             response.setData("ID shouldn't be null");
             response.setMsg("Parameter ERROR");
@@ -62,8 +62,18 @@ public class BookController {
     }
 
     @PostMapping("/searchBook")
-    public BaseResponse<String> findByParam(@RequestBody Book book) {
+    public BaseResponse<List<Book>> findByParam(@RequestBody Book book) {
         List<Book> books = bookMapper.findByParam(book);
+        BaseResponse response = new BaseResponse();
+        response.setData(books);
+        response.setMsg("Success");
+        response.setSuccess(true);
+        return response;
+    }
+
+    @GetMapping("/books")
+    public BaseResponse<List<Book>> getAllBooks() {
+        List<Book> books = bookMapper.getAllBooks();
         BaseResponse response = new BaseResponse();
         response.setData(books);
         response.setMsg("Success");
