@@ -19,10 +19,10 @@ public class BoolSqlProvider implements ProviderMethodResolver {
                     WHERE("id = #{id}");
                 }
                 if (StringUtils.isNotBlank(name)) {
-                    WHERE("name like #{name} || '%'");
+                    WHERE("name like concat('%', #{name}, '%')");
                 }
                 if (StringUtils.isNotBlank(press)) {
-                    WHERE("press like #{press} || '%'");
+                    WHERE("press like concat('%', #{press}, '%')");
                 }
                 ORDER_BY("id");
             }

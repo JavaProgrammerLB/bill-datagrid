@@ -6,6 +6,8 @@ import bill.lau.datagrid.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class BookController {
 
@@ -44,9 +46,16 @@ public class BookController {
 
     @PutMapping("/book")
     public BaseResponse<String> update(@RequestBody Book book) {
+        if(book.getId() == null){
+            BaseResponse response = new BaseResponse();
+            response.setData("ID shouldn't be null");
+            response.setMsg("Parameter ERROR");
+            response.setSuccess(false);
+            return response;
+        }
         bookMapper.update(book);
         BaseResponse response = new BaseResponse();
-        response.setData("Delete Success");
+        response.setData("Update Success");
         response.setMsg("Successs");
         response.setSuccess(true);
         return response;
@@ -54,9 +63,9 @@ public class BookController {
 
     @PostMapping("/searchBook")
     public BaseResponse<String> findByParam(@RequestBody Book book) {
-        bookMapper.findByParam(book);
+        List<Book> books = bookMapper.findByParam(book);
         BaseResponse response = new BaseResponse();
-        response.setData("Query Success");
+        response.setData(books);
         response.setMsg("Success");
         response.setSuccess(true);
         return response;
