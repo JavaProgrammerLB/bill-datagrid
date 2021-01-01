@@ -16,43 +16,43 @@
         <button type="button" class="btn btn-primary">新增</button>
     </div>
     <div id="select-form">
-        <form>
-            <div class="form-row align-items-center">
-                <div class="col-sm-2 my-1">
-                    <label class="sr-only" for="inlineFormInputGroupID">全部</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">ID</div>
-                        </div>
-                        <input type="text" class="form-control" id="inlineFormInputGroupID" placeholder="全部">
+        <div class="form-row align-items-center">
+            <div class="col-sm-2 my-1">
+                <label class="sr-only" for="inlineFormInputGroupID">全部</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">ID</div>
                     </div>
-                </div>
-
-                <div class="col-sm-2 my-1">
-                    <label class="sr-only" for="inlineFormInputGroupName">全部</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">书名</div>
-                        </div>
-                        <input type="text" class="form-control" id="inlineFormInputGroupName" placeholder="全部">
-                    </div>
-                </div>
-
-                <div class="col-sm-3 my-1">
-                    <label class="sr-only" for="inlineFormInputGroupPress">全部</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">出版社</div>
-                        </div>
-                        <input type="text" class="form-control" id="inlineFormInputGroupPress" placeholder="全部">
-                    </div>
-                </div>
-
-                <div class="col-auto my-1">
-                    <button type="submit" class="btn btn-primary">查询</button>
+                    <input type="text" class="form-control" id="inlineFormInputGroupID" placeholder="全部" v-model="id">
                 </div>
             </div>
-        </form>
+
+            <div class="col-sm-2 my-1">
+                <label class="sr-only" for="inlineFormInputGroupName">全部</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">书名</div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroupName" placeholder="全部"
+                           v-model="name">
+                </div>
+            </div>
+
+            <div class="col-sm-3 my-1">
+                <label class="sr-only" for="inlineFormInputGroupPress">全部</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">出版社</div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroupPress" placeholder="全部"
+                           v-model="press">
+                </div>
+            </div>
+
+            <div class="col-auto my-1">
+                <button type="submit" class="btn btn-primary" @click="submit">查询</button>
+            </div>
+        </div>
     </div>
     <div id="table">
         <table class="table table-hover">
@@ -94,8 +94,23 @@
         el: '#app',
         data: {
            books:[],
+           id:"",
+           name:"",
+           press:""
         },
         methods: {
+            submit: function(){
+            let vue_this = this;
+            axios.post("http://localhost:8080/searchBook", {
+                id: vue_this.id,
+                name: vue_this.name,
+                press: vue_this.press
+            }).then(function(response){
+                vue_this.books = response.data.data;
+            }).catch(function(error){
+                alert(error);
+             });
+            }
         },
         beforeMount: function(){
             let vue_this = this;
@@ -109,6 +124,10 @@
             });
         }
     })
+
+
+
+
 
 </script>
 </body>
