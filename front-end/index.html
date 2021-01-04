@@ -71,7 +71,7 @@
                 <td>{{ book.press }}</td>
                 <td>
                     <button type="button" class="btn btn-primary">修改</button>
-                    <button type="button" class="btn btn-danger">删除</button>
+                    <button type="button" class="btn btn-danger" @click="deleteById(book.id)">删除</button>
                 </td>
             </tr>
             </tbody>
@@ -110,6 +110,26 @@
             }).catch(function(error){
                 alert(error);
              });
+            },
+            deleteById: function(bookId){
+                let vue_this = this;
+                axios.delete("http://localhost:8080/book/" + bookId).then(function(response){
+                    if(response.data.success){
+                        axios.post("http://localhost:8080/searchBook", {
+                        id: vue_this.id,
+                        name: vue_this.name,
+                        press: vue_this.press
+                    }).then(function(response){
+                        vue_this.books = response.data.data;
+                    }).catch(function(error){
+                        alert(error);
+                     });
+                    }else{
+                        alert(response.data.msg)
+                    }
+                }).catch(function(error){
+                    alert(error);
+                });
             }
         },
         beforeMount: function(){
@@ -124,11 +144,6 @@
             });
         }
     })
-
-
-
-
-
 </script>
 </body>
 </html>
