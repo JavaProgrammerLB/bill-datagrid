@@ -20,3 +20,6 @@ The following guides illustrate how to use some features concretely:
 * [Managing Transactions](https://spring.io/guides/gs/managing-transactions/)
 * [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
 
+### Examples
+* [Admin Example](https://demo.backpackforlaravel.com)
+* [CRUD Example in codepen](https://codepen.io/mevdschee/pen/BpbEbj)
